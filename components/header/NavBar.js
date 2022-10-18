@@ -1,11 +1,24 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from "../../images/logo-dark.svg"
 import logoLight from "../../images/logo-light.svg"
 
 const NavBar = () => {
+    const [navSize, setnavSize] = useState("10rem");
+    const [navColor, setnavColor] = useState("transparent");
+    const listenScrollEvent = () => {
+        window.scrollY > 100 ? setnavColor("bg-white") : setnavColor("bg-transparent");
+        window.scrollY > 10 ? setnavSize("5rem") : setnavSize("10rem");
+    };
+    useEffect(() => {
+        window.addEventListener("scroll", listenScrollEvent);
+        return () => {
+            window.removeEventListener("scroll", listenScrollEvent);
+        };
+    }, []);
+    console.log(navColor)
     return (
-        <div className="navbar bg-transparent fixed top-0">
+        <div className={`navbar ${navColor}  fixed top-0 z-50`}>
             <div className='w-full lg:container lg:mx-auto'>
                 <div className="flex items-center lg:h-20 navbar-start">
                     <div className="dropdown">

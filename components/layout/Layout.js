@@ -9,6 +9,7 @@ const Layout = ({ children }) => {
             <Head>
                 <title>Washing Services</title>
                 <link rel="shortcut icon" href="/favicon.svg" />
+                <script defer src="https://kit.fontawesome.com/441504c5bc.js" crossorigin="anonymous"></script>
             </Head>
             <NavBar />
             <div>
