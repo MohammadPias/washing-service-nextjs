@@ -1,3 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+
+  h2 {
+    @apply text-4xl font-bold;
+  }
+
+  h3 {
+    @apply text-2xl font-medium;
+  }
+
+  h2 {
+    @apply text-4xl font-bold;
+  }
+}
+
+@layer components {
+  .container {
+    @apply w-10/12
+  }
+
+  .btn {
+    @apply rounded-none border-none
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-tr from-primary to-primary-light
+  }
+
+  .btn-secondary {
+    @apply bg-gradient-to-tr from-secondary to-accent
+  }
+}
+
 html,
 body {
   padding: 0;
@@ -19,8 +57,13 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
     color: white;
     background: black;
   }
 }
+
+
+/* background-color: rgb(30, 58, 138);
+background-image: radial-gradient(at 100% 0%, rgb(15, 23, 42) 0, transparent 100%), radial-gradient(at 0% 100%, rgb(15, 23, 42) 0, transparent 100%); */
