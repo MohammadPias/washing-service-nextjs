@@ -10,7 +10,7 @@
   }
 
   h3 {
-    @apply text-2xl font-medium;
+    @apply text-xl font-medium;
   }
 
   h2 {
@@ -62,6 +62,29 @@ a {
     color: white;
     background: black;
   }
+}
+
+.slick-slide {
+  padding: 20px;
+}
+
+.slick-prev {
+  left: -20px;
+  z-index: 9;
+}
+
+.slick-next {
+  right: -20px;
+  z-index: 9;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #fc4949 !important;
+}
+
+.slick-dots {
+  bottom: 0px;
 }
 
 

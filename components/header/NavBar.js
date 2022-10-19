@@ -4,11 +4,11 @@ import logo from "../../images/logo-dark.svg"
 import logoLight from "../../images/logo-light.svg"
 
 const NavBar = () => {
-    const [navSize, setnavSize] = useState("10rem");
-    const [navColor, setnavColor] = useState("transparent");
+    const [navBorder, setNavBorder] = useState('border-none');
+    const [navColor, setNavColor] = useState("transparent");
     const listenScrollEvent = () => {
-        window.scrollY > 100 ? setnavColor("bg-white") : setnavColor("bg-transparent");
-        window.scrollY > 10 ? setnavSize("5rem") : setnavSize("10rem");
+        window.scrollY > 100 ? setNavColor("bg-white") : setNavColor("bg-transparent");
+        window.scrollY > 100 ? setNavBorder("border-b border-slate-300 shadow-sm") : setNavBorder('border-none');
     };
     useEffect(() => {
         window.addEventListener("scroll", listenScrollEvent);
@@ -16,9 +16,8 @@ const NavBar = () => {
             window.removeEventListener("scroll", listenScrollEvent);
         };
     }, []);
-    console.log(navColor)
     return (
-        <div className={`navbar ${navColor}  fixed top-0 z-50`}>
+        <div className={`navbar ${navColor}  fixed top-0 z-50 ${navBorder}`}>
             <div className='w-full lg:container lg:mx-auto'>
                 <div className="flex items-center lg:h-20 navbar-start">
                     <div className="dropdown">
@@ -33,7 +32,7 @@ const NavBar = () => {
                         </ul>
                     </div>
                     <a className="">
-                        <div className='lg:w-3/5'>
+                        <div className='lg:w-4/5'>
                             <Image src={logo} alt="logo" />
                             {/* <Image src={logoLight} alt="logo" /> */}
                         </div>

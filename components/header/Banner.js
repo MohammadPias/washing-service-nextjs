@@ -3,9 +3,10 @@ import React from 'react';
 import heroBg from "../../images/hero-banner.jpg";
 import hero from "../../images/hero.png";
 import Fade from 'react-reveal/Fade';
+import { getBgBanner, homeBanner } from '../../helper/helper';
 
 const Banner = () => {
-    const homeBanner = {
+    /* const homeBanner = {
         backgroundImage: `url(${heroBg.src})`,
         minHeight: "100vh",
         width: "100%",
@@ -13,10 +14,10 @@ const Banner = () => {
         backgroundSize: 'cover',
         backgroundRepeat: "no-repeat"
 
-    }
+    } */
 
     return (
-        <div style={homeBanner} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-10">
+        <div style={getBgBanner(heroBg)} className=" min-h-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-10">
             <Fade left >
                 <div className='mt-10 order-2 lg:order-1 flex  justify-start items-center col-span-6'>
                     <div className='flex flex-col mx-5 lg:ml-28 lg:mr-0'>
@@ -26,7 +27,7 @@ const Banner = () => {
                             <br />
                             Washing Services .
                         </h1>
-                        <button className='btn btn-primary mt-5 w-32'>Learn More</button>
+                        <button className='btn btn-primary my-5 w-32'>Learn More</button>
                     </div>
                 </div>
             </Fade>

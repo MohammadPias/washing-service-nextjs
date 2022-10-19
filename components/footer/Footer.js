@@ -4,7 +4,7 @@ import logo from "../../images/logo-light.svg"
 
 const Footer = () => {
     return (
-        <div className='bg-secondary'>
+        <div className='bg-secondary mt-20'>
             <footer className="footer p-10 text-slate-300">
                 <div>
                     <Image width="200" height="60" src={logo} alt="logo" />
@@ -31,7 +31,7 @@ const Footer = () => {
                 </div>
             </footer>
             <div className='text-center text-slate-300 border-t border-t-slate-400 py-4'>
-                <p>Copyright © 2022 - All right reserved by ACME Industries Ltd</p>
+                <p>Copyright © {new Date().getFullYear()}- All right reserved by Pressure Washing Services.</p>
             </div>
         </div>
     )
