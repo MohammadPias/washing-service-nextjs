@@ -1,6 +1,8 @@
 import About from "../components/about/About";
 import Category from "../components/category/Category";
 import CompletedWork from "../components/completedWork/CompletedWork";
+import Contact from "../components/contact/Contact";
+import FeedBack from "../components/feedBack/FeedBack";
 import Banner from "../components/Header/Banner";
 import Newsletter from "../components/newsletter/Newsletter";
 
@@ -12,6 +14,8 @@ export default function Home() {
       <About />
       <CompletedWork />
       <Newsletter />
+      <FeedBack />
+      <Contact />
     </div>
 
   )

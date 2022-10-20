@@ -6,15 +6,6 @@ import Fade from 'react-reveal/Fade';
 import { getBgBanner, homeBanner } from '../../helper/helper';
 
 const Banner = () => {
-    /* const homeBanner = {
-        backgroundImage: `url(${heroBg.src})`,
-        minHeight: "100vh",
-        width: "100%",
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: "no-repeat"
-
-    } */
 
     return (
         <div style={getBgBanner(heroBg)} className=" min-h-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-10">

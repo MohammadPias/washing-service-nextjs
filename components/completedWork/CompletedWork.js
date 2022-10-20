@@ -7,43 +7,9 @@ import Slide3 from "../../images/deck-cleaning.jpg";
 import Slide4 from "../../images/driveway-cleaning.jpg";
 import Slide5 from "../../images/house-cleaning.jpg";
 import Image from 'next/image';
+import { sliderSettings } from '../../helper/helper';
 
 const CompletedWork = () => {
-    var settings = {
-        dots: true,
-        infinite: true,
-        speed: 1000,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        initialSlide: 0,
-        autoplay: true,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    initialSlide: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    };
     return (
         <div className='container mx-auto'>
             <div className='text-center my-10'>
@@ -51,7 +17,7 @@ const CompletedWork = () => {
                 <p className='text-primary font-medium'>Deck cleaning | Driveway cleaning | House Cleaning</p>
             </div>
             <Fade left>
-                <Slider {...settings}>
+                <Slider {...sliderSettings}>
                     <div>
                         <Image src={Slide1} alt="slider" />
                     </div>
