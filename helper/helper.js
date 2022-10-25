@@ -46,3 +46,12 @@ export const sliderSettings = {
         }
     ]
 };
+
+export const bgLightStyle = {
+    backgroundColor: "rgb(255, 255, 255)",
+    backgroundImage: "radial-gradient(at 100% 0%, rgb(252, 231, 243) 0, transparent 60%), radial-gradient(at 0% 100%, rgb(203, 213, 225) 0, transparent 60%)",
+}
+export const bgDarkStyle = {
+    backgroundColor: "rgb(15, 24, 42)",
+    backgroundImage: "radial-gradient(at 100% 0%, rgb(20, 46, 89) 0, transparent 60%), radial-gradient(at 0% 100%, rgb(20, 46, 89) 0, transparent 60%)",
+}

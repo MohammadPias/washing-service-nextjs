@@ -11,7 +11,7 @@ const FeedBack = () => {
         <div style={getBgBanner(feedBackBg)} className='mt-20 max-h-screen'>
             <div className='container mx-auto'>
                 <div className='my-10'>
-                    <h2 className='text-center text-secondary'>Customer Reviews</h2>
+                    <h2 className='text-center text-secondary dark:text-white'>Customer Reviews</h2>
                     <p className='text-center text-primary font-medium'>Our Customers say about us</p>
                 </div>
                 <Slider {...sliderSettings}>

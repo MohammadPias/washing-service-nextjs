@@ -19,10 +19,10 @@ const About = () => {
                 </Fade>
                 <Fade bottom>
                     <div className='flex flex-col justify-center'>
-                        <h2 className='text-secondary'>
+                        <h2 className='text-secondary dark:text-white'>
                             Who we are ?
                         </h2>
-                        <p className='mt-4 font-medium text-slate-600'>
+                        <p className='mt-4 font-medium text-slate-600 dark:text-slate-400'>
                             Pressure washing services is a privately owned, full service pressure washing company providing many of your power washing needs. We offer our services to commercial areas as well as residential.
                             <br />
                             <br />
@@ -42,8 +42,8 @@ const About = () => {
                     </div>
                 </Fade>
                 <Fade left>
-                    <div className='flex flex-col justify-center'>
-                        <h2 className='text-secondary'>
+                    <div className='flex flex-col justify-center text-slate-700 dark:text-slate-400'>
+                        <h2 className='text-secondary dark:text-white'>
                             Why choose us ?
                         </h2>
 

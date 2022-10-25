@@ -13,7 +13,7 @@ const CompletedWork = () => {
     return (
         <div className='container mx-auto'>
             <div className='text-center my-10'>
-                <h2 className='text-secondary'>Recent Completed Work</h2>
+                <h2 className='text-secondary dark:text-white'>Recent Completed Work</h2>
                 <p className='text-primary font-medium'>Deck cleaning | Driveway cleaning | House Cleaning</p>
             </div>
             <Fade left>
