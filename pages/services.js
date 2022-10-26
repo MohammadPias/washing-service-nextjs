@@ -9,10 +9,10 @@ const Services = () => {
     const [date, setDate] = useState(new Date());
     return (
         <Layout>
-            <div className='container mx-auto mt-32'>
-                <h3 className="text-center text-primary">Available Services on {format(date, "PP")}</h3>
+            <div className='container mx-auto'>
+                <h3 className="text-center text-primary pt-32">Available Services on {format(date, "PP")}</h3>
 
-                <div className='mt-10 grid grid-cols-1 lg:grid-cols-12'>
+                <div className='mt-10 grid grid-cols-1 lg:grid-cols-12 gap-5'>
                     <div className='lg:col-span-4'>
                         <Calender
                             date={date}
@@ -25,7 +25,7 @@ const Services = () => {
                         <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
                             {data1 &&
                                 data1.map(service =>
-                                    <div key={service.title}>
+                                    <div key={service.title} className="">
                                         <Service service={service} />
                                     </div>
 

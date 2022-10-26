@@ -6,19 +6,28 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import Cookies from 'js-cookie'
 import { useEffect } from 'react';
 import { StoreProvider } from '../helper/Store';
+import { ThemeProvider } from "next-themes";
+import NavBar from '../components/Header/NavBar';
+import Footer from '../components/footer/Footer';
 
 function MyApp({ Component, pageProps }) {
-  useEffect(() => {
-    /*  if (Cookies.get("theme") === 'dark' || (!('theme' in Cookies) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-       document.documentElement.classList.add('dark')
-     } else {
-       document.documentElement.classList.remove('dark')
-     } */
-  }, [])
+  if (Component.getLayout) {
+    return Component.getLayout(
+      <ThemeProvider enableSystem={true} attribute="class">
+        <StoreProvider>
+          <Component {...pageProps} />
+        </StoreProvider>
+      </ThemeProvider>
+    )
+  }
   return (
-    <StoreProvider>
-      <Component {...pageProps} />
-    </StoreProvider>
+    <ThemeProvider enableSystem={true} attribute="class">
+      <StoreProvider>
+        <NavBar />
+        <Component {...pageProps} />
+        <Footer />
+      </StoreProvider>
+    </ThemeProvider>
   )
 }
 

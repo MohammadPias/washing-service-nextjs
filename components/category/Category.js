@@ -37,19 +37,19 @@ const Category = () => {
                 </Fade> */}
                 <div className='lg:col-span-3 flex flex-col justify-center'>
                     <Fade top>
-                        <div className='flex items-center space-x-5 justify-center border border-gray-light py-4 rounded-md mb-5 hover:shadow-lg transition-all duration-500 cursor-pointer'>
+                        <div className='flex items-center space-x-5 justify-center border border-slate-400 py-4 rounded-md mb-5 hover:shadow-lg dark:shadow-black transition-all duration-500 cursor-pointer'>
                             <i className="fa-solid fa-house-chimney"></i>
                             <h5>Domestic</h5>
                         </div>
                     </Fade>
                     <Fade right>
-                        <div className='flex items-center space-x-5 justify-center border border-gray-light py-4 rounded-md mb-5 hover:shadow-lg transition-all duration-500 cursor-pointer'>
+                        <div className='flex items-center space-x-5 justify-center border border-slate-400 py-4 rounded-md mb-5 hover:shadow-lg dark:shadow-black transition-all duration-500 cursor-pointer'>
                             <i className="fa-solid fa-industry"></i>
                             <h5>Industrial</h5>
                         </div>
                     </Fade>
                     <Fade bottom>
-                        <div className='flex items-center space-x-5 justify-center border border-gray-light py-4 rounded-md mb-5 hover:shadow-lg transition-all duration-500 cursor-pointer'>
+                        <div className='flex items-center space-x-5 justify-center border border-slate-400 py-4 rounded-md mb-5 hover:shadow-lg dark:shadow-black transition-all duration-500 cursor-pointer'>
                             <i className="fa-solid fa-briefcase"></i>
                             <h5>Commercial</h5>
                         </div>

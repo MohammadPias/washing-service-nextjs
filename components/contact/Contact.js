@@ -2,22 +2,18 @@ import React from 'react';
 import MapBox from '../mapBox/MapBox';
 import Fade from "react-reveal/Fade";
 import { useForm, Controller } from "react-hook-form";
+import { bgDarkStyle, bgLightStyle, CheckTheme } from '../../helper/helper';
 
 const Contact = () => {
     const { control, handleSubmit } = useForm();
-
-    const styles = {
-        backgroundColor: "rgb(255, 255, 255)",
-        backgroundImage: " radial-gradient(at 100% 0%, rgb(251, 207, 232) 0, transparent 60%), radial-gradient(at 0% 100%, rgb(203, 213, 225) 0, transparent 60%)",
-
-    }
+    const darkMode = CheckTheme()
 
     const onSubmit = (data) => {
         console.log(data)
         // alert(JSON.stringify(data));
     };
     return (
-        <div className='mt-20 container mx-auto'>
+        <div className='py-20 container mx-auto'>
             <div>
                 <h2 className='text-center'>Contact us</h2>
             </div>
@@ -30,7 +26,7 @@ const Contact = () => {
                 </Fade>
 
                 <Fade right>
-                    <form onSubmit={handleSubmit(onSubmit)} style={styles} className="col-span-3 border border-slate-300 shadow-sm min-h-32 flex justify-center items-center">
+                    <form onSubmit={handleSubmit(onSubmit)} style={darkMode === "dark" ? bgDarkStyle : bgLightStyle} className="col-span-3 border border-slate-300 shadow-sm min-h-32 flex justify-center items-center">
                         <div className="card-body">
                             <div className="form-control">
                                 <label className="label">

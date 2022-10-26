@@ -1,3 +1,5 @@
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export const getBgBanner = (url) => {
     return {
@@ -50,8 +52,23 @@ export const sliderSettings = {
 export const bgLightStyle = {
     backgroundColor: "rgb(255, 255, 255)",
     backgroundImage: "radial-gradient(at 100% 0%, rgb(252, 231, 243) 0, transparent 60%), radial-gradient(at 0% 100%, rgb(203, 213, 225) 0, transparent 60%)",
+    color: "#0f182a",
 }
 export const bgDarkStyle = {
     backgroundColor: "rgb(15, 24, 42)",
     backgroundImage: "radial-gradient(at 100% 0%, rgb(20, 46, 89) 0, transparent 60%), radial-gradient(at 0% 100%, rgb(20, 46, 89) 0, transparent 60%)",
+    color: "#ffffff",
+};
+
+export const CheckTheme = () => {
+    const [mounted, setMounted] = useState(false);
+    const { systemTheme, theme } = useTheme();
+    const currentTheme = theme === "system" ? systemTheme : theme;
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
+
+    return currentTheme;
 }

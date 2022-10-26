@@ -2,7 +2,6 @@ import React from 'react';
 
 const Service = ({ service }) => {
     const { title, category, price, duration } = service;
-    console.log(service)
     return (
         <div className='p-5 border border-slate-400 shadow-sm'>
             <h4 className="text-lg font-bold text-center text-secondary dark:text-white">{title}</h4>
