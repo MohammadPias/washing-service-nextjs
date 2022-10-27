@@ -15,12 +15,12 @@ const SignUp = () => {
         console.log(data)
     };
     return (
-        <Layout>
+        <Layout title="Signup">
             <div className='min-h-screen flex justify-center items-center'>
                 <div className="lg:w-2/3 mx-auto grid grid-cols-1 lg:grid-cols-3">
                     <div className="col-span-1 border border-slate-400 shadow-sm lg:border-b-neutral-content lg:border-r-neutral-content p-5 flex items-center">
                         {
-                            darkMode ?
+                            darkMode === "dark" ?
                                 <Image src={logo} alt="logo" />
                                 :
                                 <Image src={logoDark} alt="logo" />
