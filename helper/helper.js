@@ -72,3 +72,12 @@ export const CheckTheme = () => {
 
     return currentTheme;
 }
+
+
+export const BookingMenus = [
+    { name: "Booking Overview", url: "/dashboard/bookings", avatar: <i className="text-primary fa-solid fa-eye"></i> },
+    { name: "Pending Bookings", url: "/dashboard/bookings/pending", avatar: <i className="text-primary fa-solid fa-receipt"></i> },
+    { name: "Completed Bookings", url: "/dashboard/bookings/completed", avatar: <i className="text-primary fa-solid fa-circle-check"></i> },
+    { name: "Cancel Bookings", url: "/dashboard/bookings/cancel", avatar: <i className="text-primary fa-solid fa-rectangle-xmark"></i> },
+    { name: "Revenue", url: "/dashboard/bookings/revenue", avatar: <i className="text-primary fa-solid fa-sack-dollar"></i> },
+]

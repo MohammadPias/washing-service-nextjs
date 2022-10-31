@@ -33,6 +33,14 @@
   .btn-secondary {
     @apply bg-gradient-to-tr from-secondary to-accent
   }
+
+  .nav-link {
+    @apply text-base font-medium my-3 py-3 px-5 flex space-x-4 items-center
+  }
+
+  .avatar-link {
+    @apply py-2
+  }
 }
 
 html,
@@ -91,6 +99,15 @@ a {
 
 .slick-dots {
   bottom: 0px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(24, 34, 51, 0.1);
+  border-radius: 3px;
 }
 
 
