@@ -23,7 +23,7 @@
   }
 
   .btn {
-    @apply rounded-none border-none
+    @apply rounded-none border-none rounded-md
   }
 
   .btn-primary {

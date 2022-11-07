@@ -1,20 +1,16 @@
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import SimpleCard from '../card/SimpleCard';
 
 
 const ContentLayout = ({ items, children }) => {
-    // const items = []
     const router = useRouter();
     const matchPath = items?.find(item => item.url === router.asPath)
-    // console.log(matchPath)
     const [selectItem, setSelectItem] = useState(matchPath?.name);
 
     const handleClick = (name) => {
         setSelectItem(name)
     }
-
-    console.log(items)
 
     return (
         <>

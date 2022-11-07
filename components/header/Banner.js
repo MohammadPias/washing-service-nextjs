@@ -4,7 +4,7 @@ import heroBg from "../../images/hero-banner.jpg";
 import heroBgDark from "../../images/hero-banner-dark.jpg";
 import hero from "../../images/hero.png";
 import Fade from 'react-reveal/Fade';
-import { CheckTheme, getBgBanner } from '../../helper/helper';
+import { CheckTheme, getBgBanner } from '../../utils/helper';
 
 const Banner = () => {
     const darkMode = CheckTheme()

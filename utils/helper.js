@@ -1,5 +1,10 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import bcrypt from 'bcryptjs';
+import axios from 'axios';
+import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
+import { decode } from "jsonwebtoken";
 
 export const getBgBanner = (url) => {
     return {
@@ -81,3 +86,53 @@ export const BookingMenus = [
     { name: "Cancel Bookings", url: "/dashboard/bookings/cancel", avatar: <i className="text-primary fa-solid fa-rectangle-xmark"></i> },
     { name: "Revenue", url: "/dashboard/bookings/revenue", avatar: <i className="text-primary fa-solid fa-sack-dollar"></i> },
 ]
+
+export const UserMenus = [
+    { name: "Users Overview", url: "/dashboard/users", avatar: <i className="text-primary fa-solid fa-eye"></i> },
+
+    { name: "All Users", url: "/dashboard/users/all", avatar: <i class="fa-solid fa-user-group"></i> },
+
+    { name: "Our Team", url: "/dashboard/users/team", avatar: <i class="fa-solid fa-people-group"></i> },
+
+    { name: "Admins", url: "/dashboard/users/admins", avatar: <i class="fa-solid fa-user-gear"></i> },
+
+    { name: "Add Users", url: "/dashboard/users/add", avatar: <i class="fa-solid fa-user-plus"></i> },
+]
+
+export const encryptPassword = (pass) => {
+    bcrypt.hashSync(pass, 12, (err, hash) => {
+        if (!err) {
+            console.log(hash)
+            return hash;
+        } else {
+            console.log(err)
+        }
+    });
+
+    /* try {
+        const makeHash = await bcrypt.hash(pass, 12);
+        const hashPass = await makeHash.data
+        return hashPass;
+    } catch (err) {
+        console.log(err)
+    } */
+}
+
+export const instance = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
+    headers: Cookies.get("token") ? Cookies.get("token") : null,
+})
+
+
+export const decodeToken = () => {
+    const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
+    const decoded = jwt_decode(user.token);
+    delete decoded.token;
+    const date = Math.floor(new Date() / 1000)
+    // console.log(date, decoded.exp)
+    if (date > decoded?.exp) {
+        Cookies.remove("user")
+        return null;
+    }
+    return decoded;
+}

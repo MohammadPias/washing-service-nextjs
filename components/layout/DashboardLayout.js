@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { bgDarkStyle, bgLightStyle, CheckTheme } from '../../helper/helper';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+
+import Avatar from '../avatar/Avatar';
 import darkLogo from "../../images/logo-dark.svg";
 import lightLogo from "../../images/logo-light.svg";
-import Avatar from '../avatar/Avatar';
+import { bgDarkStyle, bgLightStyle, CheckTheme } from '../../utils/helper';
 
 const menus = [
     { name: "Bookings", url: "/dashboard/bookings", icon: "fa-solid fa-receipt" },
@@ -15,10 +18,15 @@ const menus = [
 ]
 
 const DashboardLayout = ({ title, description, children }) => {
+    const router = useRouter();
+    const matchPath = menus?.find(item => item.url === router.asPath)
     const [showSidebar, setShowSidebar] = useState(false);
-    const [activeNav, setActiveNav] = useState("Bookings");
+    const [activeNav, setActiveNav] = useState(matchPath?.name);
     const [mounted, setMounted] = useState(false);
+
+
     const darkMode = CheckTheme();
+    const { info } = useSelector(state => state.user);
 
     const handleSidebarShow = () => {
         setShowSidebar(change => setShowSidebar(!change))
@@ -32,8 +40,8 @@ const DashboardLayout = ({ title, description, children }) => {
 
 
     const navMenus = [
-        { name: "Log Out", link: "/" },
         { name: "Switch Theme", link: "/", icon: "themeIcon" },
+        { name: "Log Out", link: "/" },
     ]
 
     return (
@@ -69,15 +77,17 @@ const DashboardLayout = ({ title, description, children }) => {
                             <ul>
                                 {
                                     menus.map(item =>
-                                        <li
-                                            onClick={() => setActiveNav(item.name)}
-                                            key={item.name}
-                                            className={`nav-link ${item.name === activeNav && "bg-red-50 dark:bg-secondary-light text-primary shadow-sm"} hover:bg-red-50 dark:hover:bg-secondary-light rounded-md`}>
-                                            <div>
-                                                <i className={item.icon} />
-                                            </div>
-                                            <Link href={item.url} >{item.name}</Link>
-                                        </li>)
+                                        <Link key={item.name} href={item.url} passHref>
+                                            <li
+                                                onClick={() => setActiveNav(item.name)}
+                                                className={`nav-link ${item.name === activeNav && "bg-red-50 dark:bg-secondary-light text-primary shadow-sm"} hover:bg-red-50 dark:hover:bg-secondary-light rounded-md`}>
+                                                <div>
+                                                    <i className={item.icon} />
+                                                </div>
+                                                <span>{item.name}</span>
+                                            </li>
+                                        </Link>
+                                    )
                                 }
                             </ul>
                         </div>
@@ -95,7 +105,10 @@ const DashboardLayout = ({ title, description, children }) => {
                                 <input type="text" placeholder={`Search ${title}`} className="input input-bordered h-10 text-center max-w-xs dark:bg-secondary-light " />
 
                                 {/* Avatar=================== */}
-                                <Avatar menus={navMenus} />
+                                <div className='flex items-center space-x-3'>
+                                    <p>{info?.name}</p>
+                                    <Avatar menus={navMenus} />
+                                </div>
                             </div>
                         </div>
 

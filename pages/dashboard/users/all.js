@@ -3,19 +3,19 @@ import ContentLayout from '../../../components/layout/ContentLayout';
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 import { UserMenus } from '../../../utils/helper';
 
-const UserOverview = () => {
+const AllUsers = () => {
     return (
         <DashboardLayout title="User">
             <ContentLayout items={UserMenus}>
-                <h1 className="text-center">User Overview</h1>
+                <h3 className="text-center">All Users</h3>
             </ContentLayout>
         </DashboardLayout>
     );
 };
 
-export default UserOverview;
+export default AllUsers;
 
-UserOverview.getLayout = function pageLayout(page) {
+AllUsers.getLayout = function pageLayout(page) {
     return (
         <>
             {page}

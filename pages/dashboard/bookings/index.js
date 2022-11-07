@@ -3,7 +3,7 @@ import DashboardLayout from "../../../components/layout/DashboardLayout"
 import ContentLayout from "../../../components/layout/ContentLayout"
 import DataChart from '../../../components/dataChart/DataChart';
 import SimpleCard from '../../../components/card/SimpleCard';
-import { BookingMenus } from '../../../helper/helper';
+import { BookingMenus } from '../../../utils/helper';
 
 
 const items = [

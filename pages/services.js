@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Calender from '../components/calender/Calender';
 import Layout from '../components/layout/Layout';
 import { format } from 'date-fns';
-import { data1 } from "../helper/data"
+import { data1 } from "../utils/data"
 import Service from '../components/services/Services';
 
 const Services = () => {

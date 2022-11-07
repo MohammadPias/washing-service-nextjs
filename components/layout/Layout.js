@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Head from "next/head";
-import { bgDarkStyle, bgLightStyle, CheckTheme } from '../../helper/helper';
+import { bgDarkStyle, bgLightStyle, CheckTheme } from '../../utils/helper';
+import { Store } from '../../utils/Store';
 
 const Layout = ({ title, description, children }) => {
     const darkMode = CheckTheme();
+
+    const { state } = useContext(Store)
+    // console.log(state, "from layout")
+
+
     return (
         <div>
             <Head>

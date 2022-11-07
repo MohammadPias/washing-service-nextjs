@@ -5,8 +5,14 @@ import slide2 from "../../images/industrial.jpg"
 import slide3 from "../../images/domestic.jpg"
 import Image from 'next/image';
 import Fade from 'react-reveal/Fade';
+import { useContext } from 'react';
+import { Store } from '../../utils/Store';
 
 const Category = () => {
+    const { state } = useContext(Store);
+    // console.log(state, "state from category")
+
+
     const settings = {
         dots: true,
         infinite: true,
@@ -15,6 +21,8 @@ const Category = () => {
         slidesToScroll: 1,
         autoplay: true,
     };
+
+
     return (
         <div className='container mx-auto mt-10'>
             <div className='text-center'>

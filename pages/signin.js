@@ -1,18 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useForm, Controller } from "react-hook-form";
+import Cookies from 'js-cookie';
+import Image from 'next/image';
+import NextLink from "next/link";
+
 import logo from "../images/logo-light.svg"
 import logoDark from "../images/logo-dark.svg";
-import Image from 'next/image';
-import { useForm, Controller } from "react-hook-form";
-import NextLink from "next/link";
-import Footer from '../components/footer/Footer';
 import Layout from '../components/layout/Layout';
-import { CheckTheme } from '../helper/helper';
+import { CheckTheme } from '../utils/helper';
+import Router, { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchToken } from '../features/userSlice';
+import { useEffect } from 'react';
 
 const SignIn = () => {
     const { control, handleSubmit } = useForm();
-    const darkMode = CheckTheme()
-    const onSubmit = (data) => {
-        console.log(data)
+    const darkMode = CheckTheme();
+
+    const router = useRouter();
+    const { redirect } = router.query;
+    const { info, loading, error } = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        if (info) {
+            router.push("/")
+        }
+    }, [router, info])
+
+    console.log(router.query, Router)
+    const onSubmit = async (data) => {
+        dispatch(fetchToken(data));
+        if (info?.token) {
+            Cookies.set("user", JSON.stringify(info));
+            router.push(redirect || "/");
+        }
     };
     return (
         <Layout title="Signin">
@@ -57,11 +80,16 @@ const SignIn = () => {
                                         render={({ field }) => <input {...field} type="password" placeholder="password" className="input input-bordered dark:text-slate-500" />}
                                     />
                                 </div>
+                                {
+
+                                    error &&
+                                    <div className='p-3 flex items-center justify-center bg-red-50 text-primary rounded-lg border border-red-200 shadow-sm mt-3'>{error}</div>
+                                }
 
                                 <div className="form-control mt-6">
-                                    <button type='submit' className="btn btn-primary">Login</button>
+                                    <button type='submit' className="btn btn-primary">{loading ? "Loading..." : "Login"}</button>
                                 </div>
-                                <p className="text-primary font-medium">New to Pressure Washing services?  Please <NextLink href='/signup'>SignUp</NextLink></p>
+                                <p className="text-primary font-medium">New to Pressure Washing services?  Please <NextLink href={`/signup?redirect=${redirect || '/'}`}>SignUp</NextLink></p>
                             </div>
                         </form>
                     </div>

@@ -7,7 +7,7 @@ import Slide3 from "../../images/deck-cleaning.jpg";
 import Slide4 from "../../images/driveway-cleaning.jpg";
 import Slide5 from "../../images/house-cleaning.jpg";
 import Image from 'next/image';
-import { sliderSettings } from '../../helper/helper';
+import { sliderSettings } from '../../utils/helper';
 
 const CompletedWork = () => {
     return (

@@ -2,7 +2,7 @@ import React from 'react';
 import MapBox from '../mapBox/MapBox';
 import Fade from "react-reveal/Fade";
 import { useForm, Controller } from "react-hook-form";
-import { bgDarkStyle, bgLightStyle, CheckTheme } from '../../helper/helper';
+import { bgDarkStyle, bgLightStyle, CheckTheme } from '../../utils/helper';
 
 const Contact = () => {
     const { control, handleSubmit } = useForm();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getBgBanner } from '../../helper/helper';
+import { getBgBanner } from '../../utils/helper';
 import newsBg from "../../images/newsletter.jpg";
 import Fade from "react-reveal/Fade"
 

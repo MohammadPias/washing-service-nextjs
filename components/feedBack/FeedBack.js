@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import Fade from "react-reveal/Fade";
 import Slider from "react-slick";
-import { getBgBanner, sliderSettings } from '../../helper/helper';
+import { getBgBanner, sliderSettings } from '../../utils/helper';
 import feedBackBg from "../../images/washing-bg.png"
 
 const FeedBack = () => {
