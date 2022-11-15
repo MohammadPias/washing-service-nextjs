@@ -12,50 +12,36 @@ import { useState } from 'react';
 import useContextApi from '../utils/useStore';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { signUpThunk } from '../features/userSlice';
 
 const SignUp = () => {
     const { control, handleSubmit } = useForm();
     const [errMsg, setErrMsg] = useState(null);
 
     const darkMode = CheckTheme();
-    const { state, dispatch } = useContextApi();
     const router = useRouter();
     const { redirect } = router.query;
+    const { info, loading, error } = useSelector(state => state.user);
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        if (state?.user) {
+        if (info) {
             router.push("/")
         }
-    }, [state?.user, router])
-
-    const register = async (user) => {
-        setErrMsg(null)
-        try {
-            const { data } = await instance.post("/signup", {
-                name: user.name,
-                email: user.email,
-                password: user.password,
-            }
-            );
-            dispatch({ type: "SIGN_IN", payload: data })
-            Cookies.set("user", JSON.stringify(data))
-            // console.log(response.data)
-            router.push(redirect || "/")
-        } catch (err) {
-            const error = getError(err)
-            setErrMsg(error)
-            console.log(error)
-        }
-    }
+    }, [])
 
     const onSubmit = (data) => {
         if (data.password === data.confirmPassword) {
-            // console.log(data)
-            register(data)
+            dispatch(signUpThunk(data));
         } else {
             alert("Password don't match!")
         }
     };
+
+    if (!error && info) {
+        router.push(redirect || "/")
+    }
     return (
         <Layout title="Signup">
             <div className='min-h-screen flex justify-center items-center'>
@@ -114,11 +100,11 @@ const SignUp = () => {
                                 </div>
                                 {
 
-                                    errMsg &&
-                                    <div className='p-3 flex items-center justify-center bg-red-50 text-primary rounded-md'>{errMsg}</div>
+                                    error &&
+                                    <div className='p-3 flex items-center justify-center bg-red-50 text-primary rounded-lg border border-red-200 shadow-sm mt-3'>{error}</div>
                                 }
                                 <div className="form-control mt-6">
-                                    <button type='submit' className="btn btn-primary">Sign Up</button>
+                                    <button type='submit' className="btn btn-primary">{loading ? "Loading..." : "Sign Up"}</button>
                                 </div>
                                 <p className="text-primary font-medium">Already have an account?  Please <NextLink href={`/login?redirect=${redirect || '/'}`}>SignIn</NextLink></p>
                             </div>

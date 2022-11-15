@@ -8,10 +8,11 @@ const initialState = {
         info: Cookies.get("user") ? decodeToken() : null,
         loading: false,
         error: null,
+        count: 0,
     },
 }
 
-export const fetchToken = createAsyncThunk('user/fetchToken',
+export const signInThunk = createAsyncThunk('user/signInThunk',
     async (user, { rejectWithValue, fulfillWithValue }) => {
         try {
             const { data } = await instance.post("/signin", {
@@ -19,11 +20,27 @@ export const fetchToken = createAsyncThunk('user/fetchToken',
                 password: user.password,
             }
             );
-            // console.log(data, "Thunk data")
             return fulfillWithValue(data);
         } catch (err) {
-            // console.log(error, "error message")
             return rejectWithValue(err);
+        }
+    })
+
+
+export const signUpThunk = createAsyncThunk('user/signUpThunk',
+    async (user, { rejectWithValue, fulfillWithValue }) => {
+
+        try {
+            const { data } = await instance.post("/signup", {
+                name: user.name,
+                email: user.email,
+                password: user.password,
+            }
+            );
+            return fulfillWithValue(data);
+
+        } catch (err) {
+            return rejectWithValue(err)
         }
     })
 
@@ -38,19 +55,37 @@ const userSlice = createSlice({
 
     extraReducers: builder => {
         builder
-            .addCase(fetchToken.pending, (state) => {
+            .addCase(signInThunk.pending, (state) => {
                 state.user.loading = true;
                 state.user.error = null;
             })
-            .addCase(fetchToken.fulfilled, (state, { payload }) => {
-                console.log(state.user.info, "from fulfilled")
+            .addCase(signInThunk.fulfilled, (state, { payload }) => {
+                Cookies.set("user", JSON.stringify(payload));
+                const decodeUser = decodeToken()
                 state.user.loading = false;
-                state.user.info = payload;
+                state.user.info = decodeUser;
 
             })
-            .addCase(fetchToken.rejected, (state, { payload }) => {
+            .addCase(signInThunk.rejected, (state, { payload }) => {
                 const err = getError(payload)
                 state.user.loading = false;
+                state.user.error = err
+            })
+            .addCase(signUpThunk.pending, (state) => {
+                state.user.loading = true;
+                state.user.error = null;
+            })
+            .addCase(signUpThunk.fulfilled, (state, { payload }) => {
+                Cookies.set("user", JSON.stringify(payload));
+                const decodeUser = decodeToken()
+                state.user.loading = false;
+                state.user.info = decodeUser;
+
+            })
+            .addCase(signUpThunk.rejected, (state, { payload }) => {
+                const err = getError(payload)
+                state.user.loading = false;
+                // console.log(err, "payload error")
                 state.user.error = err
             })
     }

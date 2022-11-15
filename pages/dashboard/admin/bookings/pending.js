@@ -1,7 +1,7 @@
 import React from 'react';
-import ContentLayout from '../../../components/layout/ContentLayout';
-import DashboardLayout from '../../../components/layout/DashboardLayout';
-import { BookingMenus } from '../../../utils/helper';
+import ContentLayout from '../../../../components/layout/ContentLayout';
+import DashboardLayout from '../../../../components/layout/DashboardLayout';
+import { BookingMenus } from '../../../../utils/helper';
 
 const PendingBookings = () => {
     return (

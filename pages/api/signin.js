@@ -16,6 +16,7 @@ handler.post(async (req, res) => {
     try {
         const existUser = await User.findOne({ email: email })
         // console.log(existUser)
+        await db.disconnect();
         if (existUser?.email === email) {
             const checkPass = await bcrypt.compare(password, existUser.password);
             // console.log(checkPass, "isMatch")

@@ -9,24 +9,35 @@ import Avatar from '../avatar/Avatar';
 import darkLogo from "../../images/logo-dark.svg";
 import lightLogo from "../../images/logo-light.svg";
 import { bgDarkStyle, bgLightStyle, CheckTheme } from '../../utils/helper';
+import SwitchTheme from '../../utils/switchTheme';
 
 const menus = [
-    { name: "Bookings", url: "/dashboard/bookings", icon: "fa-solid fa-receipt" },
-    { name: "Services", url: "/dashboard/services", icon: "fa-brands fa-servicestack" },
-    { name: "Event", url: "/dashboard/event", icon: "fa-solid fa-calendar-days" },
-    { name: "Users", url: "/dashboard/users", icon: "fa-solid fa-user-group" },
+    { name: "Bookings", url: "/dashboard/admin/bookings", icon: "fa-solid fa-receipt" },
+    { name: "Services", url: "/dashboard/admin/services", icon: "fa-brands fa-servicestack" },
+    { name: "Event", url: "/dashboard/admin/event", icon: "fa-solid fa-calendar-days" },
+    { name: "Users", url: `/dashboard/admin/users?page=${0}&limit=${5}`, icon: "fa-solid fa-user-group" },
 ]
 
-const DashboardLayout = ({ title, description, children }) => {
-    const router = useRouter();
-    const matchPath = menus?.find(item => item.url === router.asPath)
+const DashboardLayout = ({
+    title,
+    description,
+    children,
+    page,
+    perPageUser,
+    setSearchText }) => {
     const [showSidebar, setShowSidebar] = useState(false);
-    const [activeNav, setActiveNav] = useState(matchPath?.name);
     const [mounted, setMounted] = useState(false);
 
 
+    const router = useRouter();
+    const path = router.asPath;
+
+    const matchPath = menus?.find(item => router.asPath.includes(item?.url) === true)
+    const [activeNav, setActiveNav] = useState(matchPath?.name || "Bookings");
+
     const darkMode = CheckTheme();
     const { info } = useSelector(state => state.user);
+
 
     const handleSidebarShow = () => {
         setShowSidebar(change => setShowSidebar(!change))
@@ -38,12 +49,15 @@ const DashboardLayout = ({ title, description, children }) => {
 
     if (!mounted) return null;
 
-
     const navMenus = [
-        { name: "Switch Theme", link: "/", icon: "themeIcon" },
-        { name: "Log Out", link: "/" },
+        { name: "Log Out", link: `/signin?redirect=${path}` },
     ]
 
+
+    const handleSearchChange = (searchText) => {
+        setSearchText(searchText)
+        router.replace(`/dashboard/admin/users?page=${page}&limit=${perPageUser}&search=${searchText}`)
+    }
     return (
         <div className='overflow-hidden'>
             <Head>
@@ -58,11 +72,22 @@ const DashboardLayout = ({ title, description, children }) => {
                     {/* Side bar=============== */}
                     <div className='lg:col-span-3 lg:h-screen pt-2 lg:p-5 bg-white shadow-sm dark:bg-secondary'>
                         <div className='grid grid-cols-8 lg:w-full lg:my-3 px-3 border-b border-slate-400 lg:border-none'>
+
+                            {/* Sidebar Log0=========================== */}
+
                             <div className='col-span-6 lg:col-span-7 flex items-center'>
                                 {darkMode === "dark" ?
-                                    <Link href="/" passHref><Image className='cursor-pointer' alt='logo' src={lightLogo} /></Link>
+                                    <Link href="/">
+                                        <a>
+                                            <Image className='cursor-pointer' alt='logo' src={lightLogo} />
+                                        </a>
+                                    </Link>
                                     :
-                                    <Link href="/" passHref><Image className='cursor-pointer' alt='logo' src={darkLogo} /></Link>
+                                    <Link href="/">
+                                        <a>
+                                            <Image className='cursor-pointer' alt='logo' src={darkLogo} />
+                                        </a>
+                                    </Link>
 
                                 }
                             </div>
@@ -73,19 +98,23 @@ const DashboardLayout = ({ title, description, children }) => {
                                 <i className="fa-solid fa-bars"></i>
                             </div>
                         </div>
+
+                        {/* Sidebar Menus=========================== */}
                         <div className={`mt-16 absolute ${showSidebar ? 'left-0 top-20' : '-left-full top-20'} lg:static z-10 lg:bg-white dark:bg-secondary w-full transition-all duration-1000`}>
                             <ul>
                                 {
                                     menus.map(item =>
-                                        <Link key={item.name} href={item.url} passHref>
-                                            <li
-                                                onClick={() => setActiveNav(item.name)}
-                                                className={`nav-link ${item.name === activeNav && "bg-red-50 dark:bg-secondary-light text-primary shadow-sm"} hover:bg-red-50 dark:hover:bg-secondary-light rounded-md`}>
-                                                <div>
-                                                    <i className={item.icon} />
-                                                </div>
-                                                <span>{item.name}</span>
-                                            </li>
+                                        <Link key={item.name} href={item.url} >
+                                            <a>
+                                                <li
+                                                    onClick={() => setActiveNav(item.name)}
+                                                    className={`nav-link ${item.name === activeNav && "bg-red-50 dark:bg-secondary-light text-primary shadow-sm"} hover:bg-red-50 dark:hover:bg-secondary-light rounded-md`}>
+                                                    <div>
+                                                        <i className={item.icon} />
+                                                    </div>
+                                                    <span>{item.name}</span>
+                                                </li>
+                                            </a>
                                         </Link>
                                     )
                                 }
@@ -94,7 +123,7 @@ const DashboardLayout = ({ title, description, children }) => {
                     </div>
 
 
-                    <div className='lg:col-span-9 flex flex-col'>
+                    <div className='lg:col-span-9 flex flex-col justify-between'>
 
                         {/* header=============== */}
 
@@ -102,8 +131,15 @@ const DashboardLayout = ({ title, description, children }) => {
                             <div className='h-20 px-8 flex justify-between items-center'>
 
                                 {/* Search bar=============== */}
-                                <input type="text" placeholder={`Search ${title}`} className="input input-bordered h-10 text-center max-w-xs dark:bg-secondary-light " />
-
+                                <input
+                                    onChange={(e) => handleSearchChange(e.target.value)}
+                                    type="text"
+                                    placeholder={`Search ${title}`}
+                                    className="input input-bordered h-10 text-center max-w-xs dark:bg-secondary-light "
+                                />
+                                {
+                                    <SwitchTheme />
+                                }
                                 {/* Avatar=================== */}
                                 <div className='flex items-center space-x-3'>
                                     <p>{info?.name}</p>
@@ -114,7 +150,7 @@ const DashboardLayout = ({ title, description, children }) => {
 
 
                         {/* Content=============== */}
-                        <div className='grow p-3 mt-6 lg:ml-6 shadow-sm rounded-lg h-screen overflow-y-auto overflow-hidden'>
+                        <div className=' mt-6 lg:ml-6 shadow-sm rounded-lg h-screen overflow-y-auto'>
                             {children}
                         </div>
 

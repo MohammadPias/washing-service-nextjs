@@ -2,8 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import useContextApi from '../../utils/useStore';
-import BookingOverview from './bookings';
+import BookingOverview from './admin/bookings';
 
 
 const Dashboard = () => {
@@ -13,9 +12,10 @@ const Dashboard = () => {
 
     useEffect(() => {
         if (!info) {
-            router.push("/signin")
+            router.push("/signin?redirect=/dashboard")
         }
-    }, [router, info])
+    }, [])
+    // console.log(info, "info")
     return <BookingOverview />;
 };
 

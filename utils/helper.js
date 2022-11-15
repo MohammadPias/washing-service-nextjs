@@ -80,24 +80,27 @@ export const CheckTheme = () => {
 
 
 export const BookingMenus = [
-    { name: "Booking Overview", url: "/dashboard/bookings", avatar: <i className="text-primary fa-solid fa-eye"></i> },
-    { name: "Pending Bookings", url: "/dashboard/bookings/pending", avatar: <i className="text-primary fa-solid fa-receipt"></i> },
-    { name: "Completed Bookings", url: "/dashboard/bookings/completed", avatar: <i className="text-primary fa-solid fa-circle-check"></i> },
-    { name: "Cancel Bookings", url: "/dashboard/bookings/cancel", avatar: <i className="text-primary fa-solid fa-rectangle-xmark"></i> },
-    { name: "Revenue", url: "/dashboard/bookings/revenue", avatar: <i className="text-primary fa-solid fa-sack-dollar"></i> },
+    // { name: "Booking Overview", url: "/dashboard/admin/bookings", avatar: <i className="fa-solid fa-eye"></i> },
+    { name: "Pending Bookings", url: "/dashboard/admin/bookings/pending", avatar: <i className="fa-solid fa-receipt"></i> },
+    { name: "Completed Bookings", url: "/dashboard/admin/bookings/completed", avatar: <i className="fa-solid fa-circle-check"></i> },
+    { name: "Cancel Bookings", url: "/dashboard/admin/bookings/cancel", avatar: <i className="fa-solid fa-rectangle-xmark"></i> },
+    { name: "Revenue", url: "/dashboard/admin/bookings/revenue", avatar: <i className="fa-solid fa-sack-dollar"></i> },
 ]
 
-export const UserMenus = [
-    { name: "Users Overview", url: "/dashboard/users", avatar: <i className="text-primary fa-solid fa-eye"></i> },
+export const GetUsersMenu = (page, limit) => {
 
-    { name: "All Users", url: "/dashboard/users/all", avatar: <i class="fa-solid fa-user-group"></i> },
+    return [
+        // { name: "Users Overview", url: "/dashboard/admin/users", avatar: <i className="fa-solid fa-eye"></i> },
 
-    { name: "Our Team", url: "/dashboard/users/team", avatar: <i class="fa-solid fa-people-group"></i> },
+        { name: "All Users", url: `/dashboard/admin/users?page=${page}&limit=${limit}`, avatar: <i className="fa-solid fa-user-group"></i> },
 
-    { name: "Admins", url: "/dashboard/users/admins", avatar: <i class="fa-solid fa-user-gear"></i> },
+        { name: "Our Team", url: "/dashboard/admin/users/team", avatar: <i className="fa-solid fa-people-group"></i> },
 
-    { name: "Add Users", url: "/dashboard/users/add", avatar: <i class="fa-solid fa-user-plus"></i> },
-]
+        { name: "Admins", url: "/dashboard/admin/users/admins", avatar: <i className="fa-solid fa-user-gear"></i> },
+
+        { name: "Add Users", url: "/dashboard/admin/users/add", avatar: <i className="fa-solid fa-user-plus"></i> },
+    ]
+}
 
 export const encryptPassword = (pass) => {
     bcrypt.hashSync(pass, 12, (err, hash) => {

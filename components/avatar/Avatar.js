@@ -1,20 +1,20 @@
 import Cookies from 'js-cookie';
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../../features/userSlice';
-import SwitchTheme from '../../utils/switchTheme';
 
 const Avatar = ({ menus, url }) => {
     const dispatch = useDispatch();
     const { info } = useSelector(state => state.user)
+    const router = useRouter()
 
 
     const handleClick = (name) => {
         if (name === "Log Out") {
-            Cookies.remove("user");
             dispatch(signOut())
-            // router.push("/login")
+            router.push("/signin")
+            Cookies.remove("user");
         }
     }
     return (
@@ -44,11 +44,6 @@ const Avatar = ({ menus, url }) => {
                         >
 
                             <Link href={item.link}><a>{item.name}</a></Link>
-
-                            {item.icon === "themeIcon" &&
-                                <div><SwitchTheme /></div>
-
-                            }
                         </li>
                     )
                 }

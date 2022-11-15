@@ -1,9 +1,9 @@
 import React from 'react';
-import DashboardLayout from "../../../components/layout/DashboardLayout"
-import ContentLayout from "../../../components/layout/ContentLayout"
-import DataChart from '../../../components/dataChart/DataChart';
-import SimpleCard from '../../../components/card/SimpleCard';
-import { BookingMenus } from '../../../utils/helper';
+import SimpleCard from '../../../../components/card/SimpleCard';
+import ContentLayout from '../../../../components/layout/ContentLayout';
+import DashboardLayout from '../../../../components/layout/DashboardLayout';
+import { BookingMenus } from '../../../../utils/helper';
+import DataChart from '../../../../components/dataChart/DataChart';
 
 
 const items = [

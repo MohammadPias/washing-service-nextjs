@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, Controller } from "react-hook-form";
-import Cookies from 'js-cookie';
 import Image from 'next/image';
 import NextLink from "next/link";
 
@@ -10,7 +9,7 @@ import Layout from '../components/layout/Layout';
 import { CheckTheme } from '../utils/helper';
 import Router, { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchToken } from '../features/userSlice';
+import { increment, signInThunk } from '../features/userSlice';
 import { useEffect } from 'react';
 
 const SignIn = () => {
@@ -27,16 +26,15 @@ const SignIn = () => {
         if (info) {
             router.push("/")
         }
-    }, [router, info])
+    }, [])
 
-    console.log(router.query, Router)
     const onSubmit = async (data) => {
-        dispatch(fetchToken(data));
-        if (info?.token) {
-            Cookies.set("user", JSON.stringify(info));
-            router.push(redirect || "/");
-        }
+        dispatch(signInThunk(data));
+
     };
+    if (!error && info) {
+        router.push(redirect || "/");
+    }
     return (
         <Layout title="Signin">
             <div className='min-h-screen flex justify-center items-center'>
