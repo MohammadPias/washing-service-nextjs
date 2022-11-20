@@ -10,6 +10,7 @@ import darkLogo from "../../images/logo-dark.svg";
 import lightLogo from "../../images/logo-light.svg";
 import { bgDarkStyle, bgLightStyle, CheckTheme } from '../../utils/helper';
 import SwitchTheme from '../../utils/switchTheme';
+import EditUserModel from '../ModelShow/EditUserModel';
 
 const menus = [
     { name: "Bookings", url: "/dashboard/admin/bookings", icon: "fa-solid fa-receipt" },
@@ -27,6 +28,8 @@ const DashboardLayout = ({
     setSearchText }) => {
     const [showSidebar, setShowSidebar] = useState(false);
     const [mounted, setMounted] = useState(false);
+
+    const { modal } = useSelector(state => state.user)
 
 
     const router = useRouter();
@@ -58,6 +61,7 @@ const DashboardLayout = ({
         setSearchText(searchText)
         router.replace(`/dashboard/admin/users?page=${page}&limit=${perPageUser}&search=${searchText}`)
     }
+
     return (
         <div className='overflow-hidden'>
             <Head>
@@ -66,6 +70,12 @@ const DashboardLayout = ({
                 <link rel="shortcut icon" href="/favicon.svg" />
             </Head >
             <div style={darkMode === "dark" ? bgDarkStyle : bgLightStyle} className=" h-screen">
+                {
+                    modal?.isModalOpen &&
+                    <EditUserModel
+                        user={modal?.payload}
+                    />
+                }
                 <div className='lg:container mx-auto grid grid-cols-1 lg:grid-cols-12'>
 
 

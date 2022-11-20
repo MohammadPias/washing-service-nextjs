@@ -7,13 +7,14 @@ import NavBar from '../components/Header/NavBar';
 import Footer from '../components/footer/Footer';
 import { Provider } from 'react-redux';
 import { store } from '../features/store'
-import EditUserModel from '../components/ModelShow/EditUserModel';
 
 function MyApp({ Component, pageProps }) {
+
+
+
   if (Component.getLayout) {
     return Component.getLayout(
       <>
-        <EditUserModel />
         <Provider store={store}>
           <ThemeProvider enableSystem={true} attribute="class">
             <Component {...pageProps} />
@@ -27,7 +28,6 @@ function MyApp({ Component, pageProps }) {
   }
   return (
     <>
-      <EditUserModel />
       <Provider store={store}>
         <ThemeProvider enableSystem={true} attribute="class">
           <NavBar />

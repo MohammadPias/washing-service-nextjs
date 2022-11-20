@@ -8,7 +8,10 @@ const initialState = {
         info: Cookies.get("user") ? decodeToken() : null,
         loading: false,
         error: null,
-        count: 0,
+        modal: {
+            isModalOpen: false,
+            payload: null,
+        },
     },
 }
 
@@ -50,6 +53,14 @@ const userSlice = createSlice({
     reducers: {
         signOut: state => {
             state.user.info = null;
+        },
+        modalOpen: (state, { payload }) => {
+            state.user.modal.isModalOpen = true;
+            state.user.modal.payload = payload;
+        },
+        modalClose: state => {
+            state.user.modal.isModalOpen = false;
+            state.user.modal.payload = null;
         }
     },
 
@@ -91,6 +102,6 @@ const userSlice = createSlice({
     }
 });
 
-export const { signOut } = userSlice.actions
+export const { signOut, modalOpen, modalClose } = userSlice.actions
 
 export default userSlice.reducer
